@@ -8,7 +8,7 @@ type InMemoryRepository struct {
     validators map[string][]*domain.Validator
 }
 
-func NewInMemoryValidatorRepository() domain.Repository {
+func NewInMemoryRepository() domain.Repository {
     return &InMemoryRepository{
         validators: make(map[string][]*domain.Validator),
     }
