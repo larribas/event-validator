@@ -1,7 +1,6 @@
 package domain
 
 import (
-    "github.com/xeipuuv/gojsonschema"
     "fmt"
 )
 
@@ -13,31 +12,21 @@ type Validator struct {
     Rules []byte
 }
 
-func NewValidator(_type string, rules []byte) (Validator, error) {
-    err := checkRulesFormat(rules)
+func NewValidator(_type string, rules []byte) (*Validator, error) {
+    err := Current.GetFormatChecker().Check(rules)
     if err != nil {
-        return nil, err
+        return nil, ErrValidatorHasWrongFormat{_type, err.Error()}
     }
 
     return &Validator{
         Type: _type,
         Version: VersionNotAssignedYet, // It will be set by the
         Rules: rules,
-    }
+    }, nil
 }
 
-type ValidatorFormatChecker interface {
-
-}
-
-func checkRulesFormat(rules []byte) error {
-    schemaLoader := gojsonschema.NewStringLoader(string(rules))
-    _, err := gojsonschema.NewSchema(schemaLoader)
-    if err != nil {
-        return err
-    }
-
-    return nil
+type FormatChecker interface {
+    Check(rules []byte) error
 }
 
 type ErrValidatorHasWrongFormat struct {
