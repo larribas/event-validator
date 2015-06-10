@@ -1,12 +1,12 @@
 package repositories
 
 import (
-    "github.com/sp-lorenzo-arribas/event_validator/domain"
-    "testing"
-    "github.com/sp-lorenzo-arribas/event_validator/test"
+	"github.com/sp-lorenzo-arribas/event_validator/domain"
+	"github.com/sp-lorenzo-arribas/event_validator/test"
+	"testing"
 )
 
 func TestInMemoryRepository(t *testing.T) {
-    domain.Current.NewRepository = NewInMemoryRepository
-    test.GenericRepositoryTest(t, func(){}, func(){})
+	domain.Current.NewRepository = NewInMemoryRepository
+	test.GenericRepositoryTest(t, func() {}, func() {})
 }

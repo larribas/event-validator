@@ -1,24 +1,24 @@
 package api
 
 import (
-    "net/http"
-    "github.com/sp-lorenzo-arribas/event_validator/domain"
-    "fmt"
+	"fmt"
+	"github.com/sp-lorenzo-arribas/event_validator/domain"
+	"net/http"
 )
 
 type GetAvailableResponse struct {
-    MinVersion int `json:"min_version"`
-    MaxVersion int `json:"max_version"`
+	MinVersion int `json:"min_version"`
+	MaxVersion int `json:"max_version"`
 }
 
 func GetAvailableController(w http.ResponseWriter, r *http.Request) {
-    _type := r.URL.Query().Get(":type")
+	_type := r.URL.Query().Get(":type")
 
-    nextVersion := domain.Current.GetRepository().GetNextVersion(_type)
-    if nextVersion == 0 {
-        writeErrorMessage(w, "TypeWithNoValidators", fmt.Sprintf("Type '%s' has no available validators", _type))
-        return
-    }
+	nextVersion := domain.Current.GetRepository().GetNextVersion(_type)
+	if nextVersion == 0 {
+		writeErrorMessage(w, "TypeWithNoValidators", fmt.Sprintf("Type '%s' has no available validators", _type))
+		return
+	}
 
-    writeJSONResponse(w, GetAvailableResponse{0, nextVersion - 1})
+	writeJSONResponse(w, GetAvailableResponse{0, nextVersion - 1})
 }
