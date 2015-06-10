@@ -1,4 +1,4 @@
 FROM scratch
-EXPOSE 7281
+EXPOSE 8190
 COPY event_validator /
 ENTRYPOINT ["/event_validator"]

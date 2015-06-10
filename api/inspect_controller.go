@@ -8,7 +8,7 @@ import (
 
 // InspectResponse represents this controller's response format
 type InspectResponse struct {
-	Rules []byte `json:"rules"`
+	Rules string `json:"rules"`
 }
 
 // InspectController handles a request to get the validation rules for a certain (type, version) combination.
@@ -28,5 +28,5 @@ func InspectController(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	writeJSONResponse(w, InspectResponse{validator.Rules})
+	writeJSONResponse(w, InspectResponse{string(validator.Rules)})
 }
