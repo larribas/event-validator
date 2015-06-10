@@ -1,7 +1,6 @@
 package api
 
 import (
-	"bytes"
 	"fmt"
 	"github.com/sp-lorenzo-arribas/event_validator/domain"
 	"net/http"
@@ -24,7 +23,7 @@ func TestInspect(t *testing.T) {
 
 	var respParameters InspectResponse
 	checkAndUnmarshalJSON(res, &respParameters, t)
-	if bytes.Compare(respParameters.Rules, validator.Rules) != 0 {
+	if respParameters.Rules != string(validator.Rules) {
 		t.Errorf("Expected GET /validators/some-type/versions/0 to respond with the right validator rules")
 	}
 }
