@@ -6,14 +6,18 @@ import (
 	"net/http"
 )
 
+// CreateRequest represents this controller's mandatory request format
 type CreateRequest struct {
 	Rules *string `json:"rules"`
 }
 
+// CreateResponse represents this controller's response format
 type CreateResponse struct {
 	Version int `json:"version"`
 }
 
+// CreateController handles a request to create a new validator. It validates that the correct parameters are supplied,
+// that the validator has the right format, and returns the version that corresponds to the new validator
 func CreateController(w http.ResponseWriter, r *http.Request) {
 	_type := r.URL.Query().Get(":type")
 

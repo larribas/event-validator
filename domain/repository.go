@@ -4,6 +4,10 @@ import (
 	"fmt"
 )
 
+// VersionNotAssignedYet identifies the next version for an empty type (one with no validators)
+const VersionNotAssignedYet = -1
+
+// A Repository is responsible for the storage and retrieval of validators from a database (or other persistence mechansim)
 type Repository interface {
 	Create(validator *Validator) (version int)
 	GetNextVersion(_type string) int

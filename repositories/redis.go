@@ -11,11 +11,15 @@ import (
 // in the event that the same Redis cluster is being shared by multiple applications
 const RedisNamespace = "github.com/socialpoint/ulog/validator"
 
+// RedisRepository uses the Redis database to store and retrieve validator information. Redis ensures an easy
+// implementation, quick access to data, but may not be as fault-tolerant as other databases (especially as
+// relational ones like PostgresSQL).
 type RedisRepository struct {
 	host, port string
 	client     *redis.Client
 }
 
+// NewRedisRepository instantiates a new RedisRepository and exposes it as a domain.Repository interface
 func NewRedisRepository(host, port string) domain.Repository {
 	return &RedisRepository{
 		host: host,

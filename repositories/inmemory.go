@@ -4,10 +4,14 @@ import (
 	"github.com/sp-lorenzo-arribas/event_validator/domain"
 )
 
+// InMemoryRepository is a lightweight implementation of a repository that stores validators in the current
+// application's heap. Thus, they are not persisted between sessions, which makes it the perfect implementation
+// to test the application's functionality.
 type InMemoryRepository struct {
 	validators map[string][]*domain.Validator
 }
 
+// NewInMemoryRepository instantiates a new InMemoryRepository and exposes it as a domain.Repository interface
 func NewInMemoryRepository() domain.Repository {
 	return &InMemoryRepository{
 		validators: make(map[string][]*domain.Validator),

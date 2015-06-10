@@ -1,3 +1,4 @@
+// Package api exposes an HTTP1.1 API to create and retrieve validators.
 package api
 
 import (
@@ -38,9 +39,10 @@ func (api *HTTPApi) Expose() {
 
 // HELPER METHODS TO HANDLE RESPONSES
 
+// ErrorResponse represents the information that will be returned by the API on a domain error
 type ErrorResponse struct {
-	Type    string `json:"type"`
-	Message string `json:"message"`
+	Type    string `json:"error_type"`
+	Message string `json:"error_message"`
 }
 
 func writeJSONResponse(w http.ResponseWriter, j interface{}) {
