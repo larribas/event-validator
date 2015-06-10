@@ -12,7 +12,6 @@ type Validator struct {
 	Rules   []byte
 }
 
-
 // NewValidator instantiates a new Validator for a certain type and with a certain set of rules. Such rules are
 // checked upon creation and may result in an error. Otherwise, it returns a Validator instance with its version
 // unassigned. It will remain unassigned until such validator is persisted by the repository and the next due
